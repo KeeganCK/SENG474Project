@@ -1,9 +1,9 @@
-import Artist from './Components/Artist';
+import TopTen from './Components/TopTen';
 
 function App() {
   return (
     <div>
-      <Artist />
+      <TopTen />
     </div>
   );
 }

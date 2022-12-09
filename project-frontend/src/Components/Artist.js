@@ -11,7 +11,7 @@ const InputContainerDiv = styled.div`
 `
 
 
-const Artist = () => {
+const Artist = (props) => {
   const [loading, setLoading] = useState(false);
 
   const onGetArtist = async (value) => {
@@ -32,6 +32,8 @@ const Artist = () => {
 			if(!response.ok) {
 				throw new Error(responseData.message);
 			}
+      props.setTopTen(responseData.data);
+      props.setTopTenSpot(responseData.spotifyData);
       setLoading(false);
     } catch (err) {
       console.log(err);
