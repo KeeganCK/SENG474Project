@@ -1,9 +1,9 @@
-import Genre from './Components/Genre';
+import Artist from './Components/Artist';
 
 function App() {
   return (
     <div>
-      <Genre />
+      <Artist />
     </div>
   );
 }
