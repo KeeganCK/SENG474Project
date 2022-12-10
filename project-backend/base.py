@@ -7,7 +7,7 @@ import requests
 api = Flask(__name__)
 CORS(api)
 
-apiKey = 'BQBYoZkUjE005tW9gnxhs4UDuzC4ZqYe42KAxPbkXBVLMPcluMms4sPYBCI5j1xN_5ivmlWhU4Dj3Qz7r78-PKNhUmC4XkLEh4INvCiTNB5NHAY8OhnK5dbU5ehg8Z1WRNG1MIDLNFhs-EVXr2bKzV0Ao9Bahzs0qJzsHG9w-0bGILp5YNE_CmLsa9WyaCg'
+apiKey = 'BQCatyFVkL-q4U_32jV-l10mnQvjUqBpUNanWUCOieED3adQvSrNZ2pXn211q8iTim7LtI07ZjkdIhwzs_ShhBpHPXgQydq9ITQ2qxJQUupRNI2EV-wut4H4GRfR_ocRId_HyAUV95DaFveL-m_97vVWWe-Eqh1DbKHhjIWA8PJLlHnYmrSRYOhq-Qfgm_0'
 BASE_URL = 'https://api.spotify.com/v1/'
 headers = {
     'Authorization': 'Bearer {token}'.format(token=apiKey)
@@ -27,13 +27,24 @@ def my_profile():
     for id in topten:
         r = requests.get(BASE_URL + 'artists/' + id, headers=headers)
         rData = r.json()
-        tempDict = {
-            'name': rData['name'],
-            'image': rData['images'][2]['url'],
-            'url': rData['external_urls']['spotify'],
-            'score': wantedDict['scores'][i],
-            'position': i+1
-        }
+
+        tempDict = {}
+        if len(rData['images']) > 0:
+            tempDict = {
+                'name': rData['name'],
+                'image': rData['images'][1]['url'],
+                'url': rData['external_urls']['spotify'],
+                'score': wantedDict['scores'][i],
+                'position': i+1
+            }
+        else:
+            tempDict = {
+                'name': rData['name'],
+                'image': rData['images'],
+                'url': rData['external_urls']['spotify'],
+                'score': wantedDict['scores'][i],
+                'position': i+1
+            }
         topTenArray.append(tempDict)
         i+=1
     
@@ -45,12 +56,22 @@ def my_profile():
     for entry in rData['artists']:
         if i >= 10:
             break
-        tempDict = {
-            'name': entry['name'],
-            'image': entry['images'][2]['url'],
-            'url': entry['external_urls']['spotify'],
-            'position': i+1
-        }
+
+        tempDict = {}
+        if len(entry['images']) > 0:
+            tempDict = {
+                'name': entry['name'],
+                'image': entry['images'][1]['url'],
+                'url': entry['external_urls']['spotify'],
+                'position': i+1
+            }
+        else:
+            tempDict = {
+                'name': entry['name'],
+                'image': entry['images'],
+                'url': entry['external_urls']['spotify'],
+                'position': i+1
+            }
         topTenSpotArray.append(tempDict)
         i+=1
     
