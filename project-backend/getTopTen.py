@@ -1,17 +1,6 @@
 import numpy as np
-import ast
-import pytz
-import math
-import itertools
-from sklearn.preprocessing import LabelBinarizer
 import pandas as pd
-import sklearn
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_absolute_error,accuracy_score
-from sklearn.model_selection import GridSearchCV
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.metrics.pairwise import cosine_similarity, euclidean_distances
@@ -46,21 +35,19 @@ indices = pd.Series(df3.index, index=df3['name']).drop_duplicates()
 
 
 def get_recommendations(name,sim,reverse):
-    # print(sim[0:20])
-    # print(name,sim)
     indices = pd.Series(df3.index, index=df3['name']).drop_duplicates()
     idx = indices[name]
 
-    # Get the pairwsie similarity scores of all artsits with that movie
+    # Get the pairwsie similarity scores of all artsits with that artist
     sim_scores = list(enumerate(sim[idx]))
     if not isinstance(sim_scores[0][1],np.ndarray):
-        # Sort the artists based on the similarity scores
+        # Sort the artists based on the similarity scores, reverse if needed
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=reverse)
 
         # Get the scores of the 10 most similar artsits
         sim_scores = sim_scores[1:11]
 
-        # Get the movie indices
+        # Get the artist indices
         indices = [i[0] for i in sim_scores]
         scores = [round(i[1]*100, 2) for i in sim_scores]
 

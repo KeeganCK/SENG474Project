@@ -7,7 +7,7 @@ import requests
 api = Flask(__name__)
 CORS(api)
 
-apiKey = 'BQAVkEXKXQlRr0GNpltqTSfDPqN6Q1da9EtoUPLaFSTFa47GMKYmzSeTuEtCOfaf0h_LccIFRxuJz_uCqlrO0XxoAeZhqp5qUhx13u-cob_BYbzhN0vggEwJT1IeY_gQOK07sHXZPF45hZY6DmnTIWcrM8Ho7yajhWQIM8Y08ifoUCzbYHK2BSnt4ckPnJk'
+apiKey = 'BQD2-5QFe49i3FylyKDl9d0RJKxSdodmIzowyeUTFzRTU40Da0X409lCzcd-k_t10yxWfefxYiZon-NciEszBNrWquwXo5J4a5KybWpJ1n6V3YryHO1pLDFAC6gOV0K5K70TFLF_7zYpNn_g8QYTPriNPKyZhqPuaU2jWPXo_PeiNB_nPbdbL5tfsgWwX4o'
 BASE_URL = 'https://api.spotify.com/v1/'
 headers = {
     'Authorization': 'Bearer {token}'.format(token=apiKey)
