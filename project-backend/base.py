@@ -7,7 +7,7 @@ import requests
 api = Flask(__name__)
 CORS(api)
 
-apiKey = 'BQCatyFVkL-q4U_32jV-l10mnQvjUqBpUNanWUCOieED3adQvSrNZ2pXn211q8iTim7LtI07ZjkdIhwzs_ShhBpHPXgQydq9ITQ2qxJQUupRNI2EV-wut4H4GRfR_ocRId_HyAUV95DaFveL-m_97vVWWe-Eqh1DbKHhjIWA8PJLlHnYmrSRYOhq-Qfgm_0'
+apiKey = 'BQAEU-GqS2H1gyhZaaorz2yXFf1ex6rbvLJMLCBYUxGxEA5fm9ZI42QmyMUwdll2zRX96xohnZKZUOhdRW10lpd79lMKRAAnpvKlKcbA5W5B5cDGbXuQ-h6rDOv4V-D3hGdPe6bqW9hDm1GpZePzGw8mW7Qhz-tZDc_deda8mgRznxvN_4MQNtuoYx_PQPg'
 BASE_URL = 'https://api.spotify.com/v1/'
 headers = {
     'Authorization': 'Bearer {token}'.format(token=apiKey)
@@ -54,8 +54,8 @@ def my_profile():
     rData = r.json()
     i = 0
     for entry in rData['artists']:
-        if i >= 10:
-            break
+        # if i >= 10:
+        #     break
 
         tempDict = {}
         if len(entry['images']) > 0:
