@@ -87,7 +87,7 @@ const Artist = (props) => {
     <>
     <InputContainerDiv>
       <RadioContainerDiv>
-        <Title level={5} style={{ marginRight: '8px' }}>Algorithms: </Title>
+        <Title level={5} style={{ marginRight: '8px' }}>Recommenders: </Title>
         <Radio.Group options={options} onChange={onChange1} value={type} optionType="button"/>
       </RadioContainerDiv>
       <Search placeholder="Enter Artist Name" enterButton="Get Artist" loading={loading} onSearch={onGetArtist}/>
