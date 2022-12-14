@@ -7,7 +7,7 @@ import requests
 api = Flask(__name__)
 CORS(api)
 
-apiKey = 'BQDbUHuIk6OZmshOT6L2QSG3p-TwzHcVfyhbnY0Z_qVOlFk0FamjqnNesB4EgTAoqjmpVvXOH9xoa3-jR7g1l_18CAtVvHklOYTX5fFNnpiEVi6PHNALjclJBdDWabv5Y9IJXXK-LPcbNIBgj4wvuSneiXXC09a07I9pi78IHvvLEL0LHg2rnQxZ5jSglHE'
+apiKey = 'BQDlJqtybu1dL1NrIyQuALMXZO9B84H8vIBnOpLWjmQsMUOtBGKpFm1B8s6j7nbx8Q3Njez929mlYHbEbWnNZqXBfaaIJYAis3Iv9uPAUCgRdWvFvaRQZvbHyxtxNA9rmLvE8k_BNatxNYN-aiVmwqhkruVlY5nYei3d6gZGNpDuzlxSd_xF1H2c0H1MZ1w'
 BASE_URL = 'https://api.spotify.com/v1/'
 headers = {
     'Authorization': 'Bearer {token}'.format(token=apiKey)
@@ -19,7 +19,12 @@ headers = {
 def my_profile():
     data = request.get_json()
 
-    wantedDict = get_recommendations(data['name'])
+    # wantedDict = get_recommendations(data['name'])
+    # print(data['type'])
+    matrix=CVectorizer()
+    sim,reverse = EuDSim(matrix)
+    wantedDict = get_recommendations(data['name'],sim,reverse)
+
 
     topTenArray = []
     topten = wantedDict['top10']
@@ -54,8 +59,8 @@ def my_profile():
     rData = r.json()
     i = 0
     for entry in rData['artists']:
-        # if i >= 10:
-        #     break
+        if i >= 10:
+            break
 
         tempDict = {}
         if len(entry['images']) > 0:
