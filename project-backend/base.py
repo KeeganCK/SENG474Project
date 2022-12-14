@@ -7,7 +7,7 @@ import requests
 api = Flask(__name__)
 CORS(api)
 
-apiKey = 'BQDlJqtybu1dL1NrIyQuALMXZO9B84H8vIBnOpLWjmQsMUOtBGKpFm1B8s6j7nbx8Q3Njez929mlYHbEbWnNZqXBfaaIJYAis3Iv9uPAUCgRdWvFvaRQZvbHyxtxNA9rmLvE8k_BNatxNYN-aiVmwqhkruVlY5nYei3d6gZGNpDuzlxSd_xF1H2c0H1MZ1w'
+apiKey = 'BQAVkEXKXQlRr0GNpltqTSfDPqN6Q1da9EtoUPLaFSTFa47GMKYmzSeTuEtCOfaf0h_LccIFRxuJz_uCqlrO0XxoAeZhqp5qUhx13u-cob_BYbzhN0vggEwJT1IeY_gQOK07sHXZPF45hZY6DmnTIWcrM8Ho7yajhWQIM8Y08ifoUCzbYHK2BSnt4ckPnJk'
 BASE_URL = 'https://api.spotify.com/v1/'
 headers = {
     'Authorization': 'Bearer {token}'.format(token=apiKey)
@@ -20,9 +20,22 @@ def my_profile():
     data = request.get_json()
 
     # wantedDict = get_recommendations(data['name'])
-    # print(data['type'])
+    simType = data['type']
     matrix=CVectorizer()
     sim,reverse = EuDSim(matrix)
+    if simType == 'CosCV':
+        matrix=CVectorizer()
+        sim,reverse = CosSim(matrix)
+    elif simType == 'CosTF':
+        matrix=TfidVectorizer()
+        sim,reverse = CosSim(matrix)
+    elif simType == 'EudCV':
+        matrix=CVectorizer()
+        sim,reverse = EuDSim(matrix)
+    elif simType == 'EudTF':
+        matrix=TfidVectorizer()
+        sim,reverse = EuDSim(matrix)
+    
     wantedDict = get_recommendations(data['name'],sim,reverse)
 
 
